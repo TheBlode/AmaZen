@@ -9,7 +9,7 @@ Are you sick of being bombarded with ads while browsing on Amazon? Me too. That'
 - Click `Load Unpacked Extension`.
 - Select the `Chrome Extension` folder.
 
-And you're done! You can open up the extension options by clicking the puzzle piece icon and clicking the love heart with a magnifying glass icon. Enjoy!
+And you're done! You can open up the extension options by clicking the puzzle piece icon and clicking the zen icon. Enjoy!
 
 # Known bugs
 - No known at this time. If you find bugs, please report them.
