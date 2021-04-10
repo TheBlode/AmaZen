@@ -1,24 +1,51 @@
 // Set Chrome storage variables
 // Empty right now... :|
+
 chrome.storage.local.get("zen_mode", function(data) {
     if (data.zen_mode != undefined) {
-        if (data.zen_mode == 1) {
-            setInterval(function() {
-                hideElements();
-            }, 1000);
-        }
+        // Assign to the script
+        assignChromeStorageLocally("1", data.zen_mode);
     }
 });
 
+setInterval(function() {
+    chrome.storage.local.get("zen_mode", function(data) {
+        if (data.zen_mode != undefined) {
+            hideElements(data.zen_mode);
+        }
+    });
+}, 1000);
+
 // Global variables
-var timeout = 6000;
+var zen_state = 0;
+
+/* =====================
+ * Function name: assignChromeStorageLocally
+ * Function description: this function will assign Chrome storage variables locally
+ * Date: 22/02/21
+ * =====================
+ */
+function assignChromeStorageLocally(variable, value) {
+    if (variable == "1") {
+        zen_state = value;
+    }
+}
 
 /*
  * Function name: hideElements
  * Function description: this function will hide "bad" elements on the Amazon page to create a zen shopping experience.
  * Date: 09/04/21
  */
-function hideElements() {
+function hideElements(state) {
+    // Check if zen state has been changed
+    if (state != zen_state) {
+        // Inform user
+        window.alert("Zen state has changed. Reloading the page.");
+
+        // Reload page
+        location.reload();
+    }
+
     // Hide Kindle advertisement
     if ($("div[name='goKindleStaticPopDiv']").length > 0) {
         // Hide Kindle advertisement
@@ -185,6 +212,18 @@ function hideElements() {
     if ($("#rhf").length > 0) {
         // Block "ad"
         $("#rhf").hide();
+    }
+
+    // Block audible ad
+    if ($("#aud_bottom_row").length > 0) {
+        // Block audible ad
+        $("#aud_bottom_row").hide();
+    }
+
+    // Block audible ad
+    if ($("#audible-carousel-container").length > 0) {
+        // Block audible ad
+        $("#audible-carousel-container").hide();
     }
 
     // Exit
